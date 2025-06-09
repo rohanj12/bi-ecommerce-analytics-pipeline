@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: stg_raw_retail_data
+    description: "Cleaned version of the raw e-commerce dataset"
+    columns:
+      - name: invoiceno
+        description: "Unique invoice number"
+        tests:
+          - not_null
+
+      - name: quantity
+        description: "Number of items sold"
+        tests:
+          - not_null
+
+      - name: unitprice
+        description: "Price per item"
+        tests:
+          - not_null
+
+  - name: int_monthly_sales
+    description: "Aggregated metrics by month including revenue, order count, and unique customers"
+    columns:
+      - name: month
+        description: "The transaction month"
+        tests:
+          - not_null
+
+      - name: total_revenue
+        description: "Sum of quantity * unitprice"
+        tests:
+          - not_null
+
+  - name: fct_monthly_sales
+    description: "Fact table for monthly sales used in dashboards"
+    columns:
+      - name: month
+        description: "Transaction month (from intermediate model)"
+        tests:
+          - not_null
